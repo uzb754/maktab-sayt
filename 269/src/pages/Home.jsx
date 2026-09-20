@@ -68,9 +68,9 @@ export default function Home() {
   };
 
   const administration = [
-    { name: "Kurbonova Intizor Maxmudovna", role: "Maktab Direktori", experience: "25 yil tajriba", badge: "Xalq Ta'limi A'lochisi" },
-    { name: "Alimatova Dilobar Gayratovna", role: "O'quv ishlari bo'yicha o'rinbosar", experience: "20 yil tajriba", badge: "Oliy toifali" },
-    { name: "Kuldasheva Soxibaxon Xoldarovna", role: "O'quv ishlari bo'yicha o'rinbosar", experience: "18 yil tajriba", badge: "Oliy toifali" }
+    { name: "Kurbonova Intizor Maxmudovna", role: "Maktab Direktori", experience: "19 yil tajriba", badge: "Oliy toifali" },
+    { name: "Alimatova Dilobar Gayratovna", role: "O'quv ishlari bo'yicha o'rinbosar", experience: "26 yil tajriba", badge: "Oliy toifali" },
+    { name: "Kuldasheva Soxibaxon Xoldarovna", role: "O'quv ishlari bo'yicha o'rinbosar", experience: "38 yil tajriba", badge: "1 toifali" }
   ];
 
   // Rasmlarni ochish uchun yordamchi funksiya (barcha rasmlarni massiv sifatida qabul qiladi)
@@ -145,12 +145,12 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-3.5">
                 <div className="bg-slate-50 hover:bg-slate-100/80 transition p-4 rounded-2xl border border-slate-100 text-center">
                   <Users className="w-5 h-5 text-blue-600 mx-auto mb-1.5" />
-                  <p className="text-2xl font-semibold text-[#1D1D1F] tracking-tight">1200+</p>
+                  <p className="text-2xl font-semibold text-[#1D1D1F] tracking-tight">881+</p>
                   <p className="text-[11px] text-slate-500 font-medium">O'quvchilar</p>
                 </div>
                 <div className="bg-slate-50 hover:bg-slate-100/80 transition p-4 rounded-2xl border border-slate-100 text-center">
                   <GraduationCap className="w-5 h-5 text-emerald-600 mx-auto mb-1.5" />
-                  <p className="text-2xl font-semibold text-[#1D1D1F] tracking-tight">85+</p>
+                  <p className="text-2xl font-semibold text-[#1D1D1F] tracking-tight">51+</p>
                   <p className="text-[11px] text-slate-500 font-medium">O'qituvchilar</p>
                 </div>
                 <div className="bg-slate-50 hover:bg-slate-100/80 transition p-4 rounded-2xl border border-slate-100 text-center">
