@@ -68,9 +68,9 @@ export default function Home() {
   };
 
   const administration = [
-    { name: "Karimova Zuxra Abduvaliyevna", role: "Maktab Direktori", experience: "22 yil tajriba", badge: "Xalq Ta'limi A'lochisi" },
-    { name: "Rustamov Jasur Anvarovich", role: "O'quv ishlari bo'yicha o'rinbosar", experience: "15 yil tajriba", badge: "Oliy toifali" },
-    { name: "Soliqova Nilufar Mahmudovna", role: "Ma'naviy-ma'rifiy ishlar bo'yicha o'rinbosar", experience: "12 yil tajriba", badge: "Metodist" }
+    { name: "Kurbonova Intizor Maxmudovna", role: "Maktab Direktori", experience: "25 yil tajriba", badge: "Xalq Ta'limi A'lochisi" },
+    { name: "Alimatova Dilobar Gayratovna", role: "O'quv ishlari bo'yicha o'rinbosar", experience: "20 yil tajriba", badge: "Oliy toifali" },
+    { name: "Kuldasheva Soxibaxon Xoldarovna", role: "O'quv ishlari bo'yicha o'rinbosar", experience: "18 yil tajriba", badge: "Oliy toifali" }
   ];
 
   // Rasmlarni ochish uchun yordamchi funksiya (barcha rasmlarni massiv sifatida qabul qiladi)
@@ -253,7 +253,7 @@ export default function Home() {
         )}
       </section>
 
-      {/* 4. YUTUQLAR (Rasmlar ustiga bosganda modal ochilib barcha rasmlarni aylantirish qo'shildi) */}
+      {/* 4. YUTUQLAR */}
       <section className="bg-gradient-to-b from-[#1D1D1F] to-black text-white py-20 rounded-[3rem] mx-4 sm:mx-8 border border-slate-800 shadow-2xl relative overflow-hidden">
         <div className="absolute right-0 bottom-0 w-96 h-96 bg-amber-500/10 blur-[140px] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-6 space-y-10 relative z-10">
@@ -303,7 +303,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. TADBIRLAR (Rasmlar ustiga bosganda modal ochilib barcha rasmlarni aylantirish qo'shildi) */}
+      {/* 5. TADBIRLAR */}
       <section className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-end mb-10">
           <div className="space-y-1.5">
@@ -324,7 +324,6 @@ export default function Home() {
             {latestEvents.map((item) => (
               <div key={item.id || item.title} className="bg-white p-7 rounded-[2rem] border border-slate-200/70 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-all">
                 <div className="space-y-3">
-                  {/* Tadbir rasmlari mavjud bo'lsa slider va modalni qo'shamiz */}
                   {(item.images?.length > 0 || item.image) && (
                     <div 
                       onClick={() => openImageModal(item.images, item.image)}
@@ -472,7 +471,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- KATTA RASM UCHUN MODAL OYNA (Barcha bo'limlardagi ko'p rasmlar o'rtasida o'tish imkoniyati bilan) --- */}
+      {/* --- KATTA RASM UCHUN MODAL OYNA --- */}
       {selectedImagesList.length > 0 && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="relative max-w-4xl w-full bg-black rounded-3xl overflow-hidden border border-white/10 shadow-2xl flex flex-col items-center">
@@ -491,7 +490,6 @@ export default function Home() {
               />
             </div>
 
-            {/* Agar rasmlar 1 tadan ko'p bo'lsa, pastda kichik rasmlar (thumbnails) chiqadi va ular orqali o'tish mumkin */}
             {selectedImagesList.length > 1 && (
               <div className="p-4 flex items-center gap-3 bg-white/5 border-t border-white/10 w-full justify-center overflow-x-auto">
                 {selectedImagesList.map((imgUrl, idx) => (

@@ -1,4 +1,17 @@
 {
+  "homepage": "https://uzb754.github.io/maktab-269-site",
+  "name": "269-school-website",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
     "firebase": "^12.19.0"
   },
