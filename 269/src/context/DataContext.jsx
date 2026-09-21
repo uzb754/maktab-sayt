@@ -3,16 +3,16 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, set, remove } from "firebase/database";
 
-// Firebase Sozlamalari
+// Firebase Sozlamalari (.env dan o'qiladi)
 const firebaseConfig = {
-  apiKey: "AIzaSyBERIFLd9yMyJHU3mDl5UGC2hr5hMjDXig",
-  authDomain: "maktab-269.firebaseapp.com",
-  databaseURL: "https://maktab-269-default-rtdb.firebaseio.com",
-  projectId: "maktab-269",
-  storageBucket: "maktab-269.firebasestorage.app",
-  messagingSenderId: "246317372987",
-  appId: "1:246317372987:web:993d778f63f9696ee66e1e",
-  measurementId: "G-FLK01YK4LF"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
@@ -117,9 +117,9 @@ export function DataProvider({ children }) {
     setSliderModeState(mode);
   };
 
-  // TELEGRAM BOT INTEGRATSIYASI
-  const BOT_TOKEN = "7683966754:AAE1eIMceOA4Dax5WGyy1Gp9ghRFFOinDhY";
-  const CHAT_ID = "6053383227";
+  // TELEGRAM BOT INTEGRATSIYASI (.env dan o'qiladi)
+  const BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+  const CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
   const sendToTelegram = async (feedbackData) => {
     const text = `📬 *Yangi Xabar (269-Maktab Saytidan)*\n\n` +
