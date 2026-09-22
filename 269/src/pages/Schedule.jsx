@@ -5,7 +5,7 @@ import scheduleData from '../../../schedule.json';
 export default function Schedule() {
   const [selectedShift, setSelectedShift] = useState('shift_1');
   const [selectedClass, setSelectedClass] = useState('1-A');
-  const [viewMode, setViewMode] = useState('table'); // 'table' yoki 'cards'
+  const [viewMode, setViewMode] = useState('cards'); // Telefonda birinchi bo'lib kartochka (qulayroq) ko'rinishi turadi
 
   const currentShiftData = scheduleData[selectedShift] || {};
   const currentClasses = currentShiftData.classes || [];
@@ -37,22 +37,22 @@ export default function Schedule() {
   const roomNumber = currentRooms[selectedClass] || '';
 
   return (
-    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 space-y-6 text-[#1D1D1F] font-sans antialiased">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8 space-y-4 sm:space-y-6 text-[#1D1D1F] font-sans antialiased">
       {/* HEADER SECTION */}
-      <div className="bg-white/85 backdrop-blur-xl p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border border-slate-200/70 shadow-sm text-center space-y-4 relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-24 bg-blue-500/5 blur-3xl rounded-full pointer-events-none"></div>
+      <div className="bg-white/90 backdrop-blur-xl p-4 sm:p-8 rounded-3xl sm:rounded-[2.5rem] border border-slate-200/75 shadow-xs text-center space-y-3 sm:space-y-4 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-20 bg-blue-500/5 blur-3xl rounded-full pointer-events-none"></div>
 
-        <div className="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-100 px-3.5 py-1 rounded-full text-blue-600 text-xs font-medium relative z-10">
+        <div className="inline-flex items-center gap-1.5 bg-blue-50/80 border border-blue-100 px-3 py-1 rounded-full text-blue-600 text-[11px] sm:text-xs font-medium relative z-10">
           <Sparkles className="w-3.5 h-3.5" />
           <span>269-umumiy o'rta ta'lim maktabi (2026-2027 o'quv yili)</span>
         </div>
 
-        <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight text-[#1D1D1F] relative z-10 leading-snug">
+        <h1 className="text-xl sm:text-4xl font-semibold tracking-tight text-[#1D1D1F] relative z-10 leading-tight">
           269-umumiy o'rta ta'lim maktabining <br className="hidden sm:inline" /> dars jadvali
         </h1>
         
         {/* Smena tanlash */}
-        <div className="flex justify-center gap-2 pt-2 relative z-10">
+        <div className="flex justify-center gap-2 pt-1 relative z-10">
           {['shift_1', 'shift_2'].map((shift) => (
             <button
               key={shift}
@@ -63,9 +63,9 @@ export default function Schedule() {
                   setSelectedClass(shiftClasses[0]);
                 }
               }}
-              className={`px-5 py-2 rounded-2xl text-xs font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 rounded-xl sm:rounded-2xl text-xs font-semibold transition-all duration-300 ${
                 selectedShift === shift
-                  ? 'bg-slate-900 text-white shadow-md'
+                  ? 'bg-slate-900 text-white shadow-sm'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/60'
               }`}
             >
@@ -74,15 +74,15 @@ export default function Schedule() {
           ))}
         </div>
 
-        {/* Sinf tanlash tugmalari (JSON'dagi sinflar ro'yxatidan olinadi) */}
-        <div className="flex overflow-x-auto pb-2 pt-2 gap-1.5 max-w-4xl mx-auto relative z-10 justify-start sm:justify-center">
+        {/* Sinf tanlash tugmalari (Mobil uchun silliq gorizontal skanerlash) */}
+        <div className="flex overflow-x-auto pb-2 pt-1 gap-1.5 max-w-4xl mx-auto relative z-10 no-scrollbar justify-start sm:justify-center">
           {currentClasses.map((cls) => (
             <button
               key={cls}
               onClick={() => setSelectedClass(cls)}
-              className={`px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all duration-300 shrink-0 ${
+              className={`px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all duration-300 shrink-0 ${
                 selectedClass === cls 
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20 scale-105' 
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20 scale-105' 
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/60'
               }`}
             >
@@ -93,22 +93,22 @@ export default function Schedule() {
       </div>
 
       {/* SCHEDULE CONTAINER */}
-      <div className="bg-white p-4 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border border-slate-200/70 shadow-sm space-y-6">
+      <div className="bg-white p-4 sm:p-8 rounded-3xl sm:rounded-[2.5rem] border border-slate-200/75 shadow-xs space-y-4 sm:space-y-6">
         
         {/* INFO & VIEW TOGGLE BAR */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-100 pb-5 gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 bg-blue-50 border border-blue-100 text-blue-600 rounded-2xl flex items-center justify-center font-bold text-sm sm:text-base shadow-xs shrink-0">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-100 pb-4 sm:pb-5 gap-3 sm:gap-4">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 border border-blue-100 text-blue-600 rounded-2xl flex items-center justify-center font-bold text-sm sm:text-base shrink-0">
               {selectedClass}
             </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-semibold text-[#1D1D1F] tracking-tight">{selectedClass} sinfi dars jadvali</h2>
-              <p className="text-xs text-slate-400 font-light flex flex-wrap items-center gap-2 pt-0.5">
-                <span className="flex items-center gap-1 text-slate-600 font-medium">
-                  <User className="w-3.5 h-3.5 text-blue-600" /> Sinf rahbari: {teacherName}
+            <div className="min-w-0 flex-1">
+              <h2 className="text-sm sm:text-lg font-semibold text-[#1D1D1F] tracking-tight truncate">{selectedClass} sinfi dars jadvali</h2>
+              <p className="text-[11px] sm:text-xs text-slate-400 font-light flex flex-wrap items-center gap-2 pt-0.5">
+                <span className="flex items-center gap-1 text-slate-600 font-medium truncate">
+                  <User className="w-3.5 h-3.5 text-blue-600 shrink-0" /> {teacherName}
                 </span>
                 {roomNumber && (
-                  <span className="flex items-center gap-1 bg-blue-50 text-blue-600 px-2 py-0.5 rounded-lg font-medium">
+                  <span className="flex items-center gap-1 bg-blue-50 text-blue-600 px-2 py-0.5 rounded-lg font-medium shrink-0">
                     <MapPin className="w-3 h-3" /> {roomNumber}-xona
                   </span>
                 )}
@@ -116,35 +116,74 @@ export default function Schedule() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between w-full sm:w-auto gap-3">
-            {/* Ko'rinishni almashtirish (Jadval yoki Kunlik kartochkalar) */}
-            <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200/60">
-              <button
-                onClick={() => setViewMode('table')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  viewMode === 'table' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-900'
-                }`}
-              >
-                <TableIcon className="w-3.5 h-3.5" /> Jadval
-              </button>
+          <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-3">
+            {/* Ko'rinishni almashtirish (Jadval yoki Kartochkalar) */}
+            <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200/60 w-full sm:w-auto justify-center">
               <button
                 onClick={() => setViewMode('cards')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  viewMode === 'cards' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-900'
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  viewMode === 'cards' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 <LayoutGrid className="w-3.5 h-3.5" /> Kunlik
               </button>
-            </div>
-
-            <div className="hidden md:block text-xs text-slate-500 font-light bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-100">
-              Maktab O'IBDO': <strong className="font-medium text-[#1D1D1F]">D.G. Alimatova</strong>
+              <button
+                onClick={() => setViewMode('table')}
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  viewMode === 'table' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-500 hover:text-slate-900'
+                }`}
+              >
+                <TableIcon className="w-3.5 h-3.5" /> Jadval
+              </button>
             </div>
           </div>
         </div>
 
-        {/* 1. DESKTOP/TABLE VIEW */}
-        {viewMode === 'table' ? (
+        {/* 1. MOBILE/CARDS VIEW (Telefonda eng qulay ko'rinish) */}
+        {viewMode === 'cards' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            {weekDays.map((day, dayIdx) => {
+              const daySubjects = classSchedule[dayIdx] || [];
+              const hasClasses = daySubjects.some(sub => sub && sub !== '—' && sub !== '');
+
+              return (
+                <div key={day.key} className="bg-slate-50/80 border border-slate-200/70 rounded-2xl p-3.5 sm:p-4 space-y-2.5">
+                  <div className="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                    <span className="font-semibold text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-blue-600" /> {day.label}
+                    </span>
+                    <span className="text-[10px] bg-blue-50 text-blue-600 font-medium px-2 py-0.5 rounded-md">
+                      {selectedClass}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    {timeSlots.map((slot, slotIdx) => {
+                      const subject = daySubjects[slotIdx] || '—';
+                      if (subject === '—' || !subject) return null;
+
+                      return (
+                        <div key={slot.num} className="bg-white p-2.5 rounded-xl border border-slate-200/60 shadow-2xs flex items-center justify-between gap-2">
+                          <div className="space-y-0.5 min-w-0">
+                            <span className="text-[10px] font-medium text-blue-600 block">{slot.num}-soat • <span className="text-slate-400">{slot.time}</span></span>
+                            <h4 className="font-medium text-xs text-slate-800 truncate">{subject}</h4>
+                          </div>
+                        </div>
+                      );
+                    })}
+
+                    {!hasClasses && (
+                      <div className="text-center py-4 text-slate-400 text-xs font-light">
+                        Bu kunga darslar belgilanmagan
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          /* 2. TABLE VIEW (Keng ekranlar uchun jadval) */
           <div className="overflow-x-auto w-full">
             <table className="w-full min-w-[850px] border-collapse text-xs">
               <thead>
@@ -176,7 +215,7 @@ export default function Schedule() {
                           <div className={`p-3 rounded-2xl border transition-all ${
                             isFree 
                               ? 'bg-transparent border-transparent opacity-30 text-center py-6 text-slate-300' 
-                              : 'bg-slate-50/80 border-slate-200/60 shadow-xs hover:border-blue-200 hover:bg-white hover:shadow-md'
+                              : 'bg-slate-50/80 border-slate-200/60 shadow-2xs hover:border-blue-200 hover:bg-white hover:shadow-xs'
                           }`}>
                             <div className="font-semibold text-[#1D1D1F] text-[13px] tracking-tight">
                               {subject}
@@ -196,54 +235,11 @@ export default function Schedule() {
               </tbody>
             </table>
           </div>
-        ) : (
-          /* 2. MOBILE/CARDS VIEW */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {weekDays.map((day, dayIdx) => {
-              const daySubjects = classSchedule[dayIdx] || [];
-              const hasClasses = daySubjects.some(sub => sub && sub !== '—');
-
-              return (
-                <div key={day.key} className="bg-slate-50/70 border border-slate-200/70 rounded-2xl p-4 space-y-3">
-                  <div className="flex items-center justify-between border-b border-slate-200/60 pb-2.5">
-                    <span className="font-semibold text-sm text-slate-900 flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-blue-600" /> {day.label}
-                    </span>
-                    <span className="text-[10px] bg-blue-50 text-blue-600 font-medium px-2 py-0.5 rounded-md">
-                      {selectedClass}
-                    </span>
-                  </div>
-
-                  <div className="space-y-2">
-                    {timeSlots.map((slot, slotIdx) => {
-                      const subject = daySubjects[slotIdx] || '—';
-                      if (subject === '—') return null;
-
-                      return (
-                        <div key={slot.num} className="bg-white p-3 rounded-xl border border-slate-200/60 shadow-2xs flex items-center justify-between gap-2">
-                          <div className="space-y-0.5">
-                            <span className="text-[10px] font-medium text-blue-600 block">{slot.num}-soat ({slot.time})</span>
-                            <h4 className="font-semibold text-xs text-slate-800">{subject}</h4>
-                          </div>
-                        </div>
-                      );
-                    })}
-
-                    {!hasClasses && (
-                      <div className="text-center py-6 text-slate-400 text-xs font-light">
-                        Bu kunga darslar belgilanmagan
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         )}
 
         {/* FOOTER */}
-        <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 font-light gap-2">
-          <div className="flex items-center gap-1.5 text-emerald-600 font-medium">
+        <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-[11px] sm:text-xs text-slate-400 font-light gap-2 text-center sm:text-left">
+          <div className="flex items-center justify-center gap-1.5 text-emerald-600 font-medium">
             <CheckCircle2 className="w-4 h-4" />
             Dars jadvali Xojimurodov Jaloliddin tomonidan tahrirlandi
           </div>
