@@ -5,7 +5,7 @@ import scheduleData from '../../../schedule.json';
 export default function Schedule() {
   const [selectedShift, setSelectedShift] = useState('shift_1');
   const [selectedClass, setSelectedClass] = useState('1-A');
-  const [viewMode, setViewMode] = useState('table'); // 'table' yoki 'cards' (mobil uchun qulay)
+  const [viewMode, setViewMode] = useState('table'); // 'table' yoki 'cards'
 
   const currentShiftData = scheduleData[selectedShift] || {};
   const currentClasses = currentShiftData.classes || [];
@@ -58,8 +58,10 @@ export default function Schedule() {
               key={shift}
               onClick={() => {
                 setSelectedShift(shift);
-                const firstCls = shift === 'shift_1' ? '1-A' : (currentShiftData.classes?.[0] || '3-B');
-                setSelectedClass(firstCls);
+                const shiftClasses = scheduleData[shift]?.classes || [];
+                if (shiftClasses.length > 0) {
+                  setSelectedClass(shiftClasses[0]);
+                }
               }}
               className={`px-5 py-2 rounded-2xl text-xs font-semibold transition-all duration-300 ${
                 selectedShift === shift
@@ -72,8 +74,8 @@ export default function Schedule() {
           ))}
         </div>
 
-        {/* Sinf tanlash tugmalari (Gorizontal skanerlanadigan) */}
-        <div className="flex overflow-x-auto pb-2 pt-2 gap-1.5 max-w-4xl mx-auto relative z-10 no-scrollbar justify-start sm:justify-center">
+        {/* Sinf tanlash tugmalari (JSON'dagi sinflar ro'yxatidan olinadi) */}
+        <div className="flex overflow-x-auto pb-2 pt-2 gap-1.5 max-w-4xl mx-auto relative z-10 justify-start sm:justify-center">
           {currentClasses.map((cls) => (
             <button
               key={cls}
@@ -115,7 +117,7 @@ export default function Schedule() {
           </div>
 
           <div className="flex items-center justify-between w-full sm:w-auto gap-3">
-            {/* Ko'rinishni almashtirish (Mobil uchun jadval yoki kartochka) */}
+            {/* Ko'rinishni almashtirish (Jadval yoki Kunlik kartochkalar) */}
             <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200/60">
               <button
                 onClick={() => setViewMode('table')}
@@ -141,7 +143,7 @@ export default function Schedule() {
           </div>
         </div>
 
-        {/* 1. DESKTOP/TABLE VIEW (Keng ekranlar uchun) */}
+        {/* 1. DESKTOP/TABLE VIEW */}
         {viewMode === 'table' ? (
           <div className="overflow-x-auto w-full">
             <table className="w-full min-w-[850px] border-collapse text-xs">
@@ -195,7 +197,7 @@ export default function Schedule() {
             </table>
           </div>
         ) : (
-          /* 2. MOBILE/CARDS VIEW (Telefon uchun qulay kunlik ko'rinish) */
+          /* 2. MOBILE/CARDS VIEW */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {weekDays.map((day, dayIdx) => {
               const daySubjects = classSchedule[dayIdx] || [];
@@ -215,7 +217,7 @@ export default function Schedule() {
                   <div className="space-y-2">
                     {timeSlots.map((slot, slotIdx) => {
                       const subject = daySubjects[slotIdx] || '—';
-                      if (subject === '—') return null; // Bo'sh soatlarni telefon ekranida yashirish orqali joy tejamiz
+                      if (subject === '—') return null;
 
                       return (
                         <div key={slot.num} className="bg-white p-3 rounded-xl border border-slate-200/60 shadow-2xs flex items-center justify-between gap-2">
