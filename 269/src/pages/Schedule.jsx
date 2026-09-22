@@ -36,8 +36,9 @@ export default function Schedule() {
   const roomNumber = currentRooms[selectedClass] || '';
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-6 text-[#1D1D1F] font-sans antialiased">
-      <div className="bg-white/85 backdrop-blur-xl p-8 rounded-[2.5rem] border border-slate-200/70 shadow-sm text-center space-y-4 relative overflow-hidden">
+    <div className="max-w-7xl mx-auto px-4 py-8 space-y-6 text-[#1D1D1F] font-sans antialiased overflow-x-hidden">
+      {/* Sarlavha va sinf tanlash qismi */}
+      <div className="bg-white/85 backdrop-blur-xl p-6 sm:p-8 rounded-[2.5rem] border border-slate-200/70 shadow-sm text-center space-y-4 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-24 bg-blue-500/5 blur-3xl rounded-full pointer-events-none"></div>
 
         <div className="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-100 px-4 py-1.5 rounded-full text-blue-600 text-xs font-medium relative z-10">
@@ -45,7 +46,9 @@ export default function Schedule() {
           <span>269-umumiy o'rta ta'lim maktabi (2026-2027 o'quv yili)</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#1D1D1F] relative z-10">269-umumiy o'rta talim maktabining <br /> dars jadvali </h1>
+        <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight text-[#1D1D1F] relative z-10">
+          269-umumiy o'rta ta'lim maktabining <br /> dars jadvali
+        </h1>
         
         <div className="flex justify-center gap-3 pt-2 relative z-10">
           {['shift_1', 'shift_2'].map((shift) => (
@@ -84,15 +87,17 @@ export default function Schedule() {
         </div>
       </div>
 
-      <div className="bg-white p-6 sm:p-8 rounded-[2.5rem] border border-slate-200/70 shadow-sm space-y-6 overflow-x-auto">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-100 pb-5 gap-4 min-w-[850px]">
+      {/* Jadval bloki */}
+      <div className="bg-white p-4 sm:p-8 rounded-[2.5rem] border border-slate-200/70 shadow-sm space-y-6">
+        {/* Sinf ma'lumotlari (min-w olib tashlandi) */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-100 pb-5 gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-blue-50 border border-blue-100 text-blue-600 rounded-2xl flex items-center justify-center font-bold text-base shadow-xs">
+            <div className="w-12 h-12 bg-blue-50 border border-blue-100 text-blue-600 rounded-2xl flex items-center justify-center font-bold text-base shadow-xs shrink-0">
               {selectedClass}
             </div>
             <div>
               <h2 className="text-lg font-semibold text-[#1D1D1F] tracking-tight">{selectedClass} sinfi dars jadvali</h2>
-              <p className="text-xs text-slate-400 font-light flex items-center gap-2 pt-0.5">
+              <p className="text-xs text-slate-400 font-light flex flex-wrap items-center gap-2 pt-0.5">
                 <span className="flex items-center gap-1 text-slate-600 font-medium">
                   <User className="w-3.5 h-3.5 text-blue-600" /> Sinf rahbari: {teacherName}
                 </span>
@@ -109,57 +114,60 @@ export default function Schedule() {
           </div>
         </div>
 
-        <table className="w-full min-w-[850px] border-collapse text-xs">
-          <thead>
-            <tr className="border-b border-slate-200/70">
-              <th className="p-3 text-left font-medium text-slate-400 w-14">#</th>
-              <th className="p-3 text-left font-medium text-slate-400 w-32">Vaqt</th>
-              {weekDays.map(day => (
-                <th key={day.key} className="p-3 text-center font-semibold text-[#1D1D1F] text-xs uppercase tracking-wider border-l border-slate-100 bg-slate-50/80 rounded-t-xl">
-                  {day.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          
-          <tbody className="divide-y divide-slate-100">
-            {timeSlots.map((slot, slotIdx) => (
-              <tr key={slot.num} className="hover:bg-slate-50/50 transition-colors">
-                <td className="p-4 font-bold text-blue-600 text-base border-r border-slate-100/60 text-center">{slot.num}</td>
-                <td className="p-4 text-slate-500 font-light flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" /> {slot.time}
-                </td>
-                
-                {weekDays.map((day, dayIdx) => {
-                  const subject = classSchedule[dayIdx]?.[slotIdx] || '—';
-                  const isFree = subject === '—';
-
-                  return (
-                    <td key={day.key} className="p-4 border-l border-slate-100 align-top">
-                      <div className={`p-3 rounded-2xl border transition-all ${
-                        isFree 
-                          ? 'bg-transparent border-transparent opacity-30 text-center py-6 text-slate-300' 
-                          : 'bg-slate-50/80 border-slate-200/60 shadow-xs hover:border-blue-200 hover:bg-white hover:shadow-md'
-                      }`}>
-                        <div className="font-semibold text-[#1D1D1F] text-[13px] tracking-tight">
-                          {subject}
-                        </div>
-                        {!isFree && (
-                          <div className="text-[10px] text-slate-400 font-light pt-1 mt-1 border-t border-slate-200/40 flex items-center justify-between">
-                            <span>{selectedClass} sinfi</span>
-                            <span className="text-blue-600 font-medium">{slot.num}-soat</span>
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                  );
-                })}
+        {/* Jadval uchun maxsus scroll konteyner (Faqat jadval suriladi, ekran emas) */}
+        <div className="w-full overflow-x-auto pb-2">
+          <table className="w-full min-w-[850px] border-collapse text-xs">
+            <thead>
+              <tr className="border-b border-slate-200/70">
+                <th className="p-3 text-left font-medium text-slate-400 w-14">#</th>
+                <th className="p-3 text-left font-medium text-slate-400 w-32">Vaqt</th>
+                {weekDays.map(day => (
+                  <th key={day.key} className="p-3 text-center font-semibold text-[#1D1D1F] text-xs uppercase tracking-wider border-l border-slate-100 bg-slate-50/80 rounded-t-xl">
+                    {day.label}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            
+            <tbody className="divide-y divide-slate-100">
+              {timeSlots.map((slot, slotIdx) => (
+                <tr key={slot.num} className="hover:bg-slate-50/50 transition-colors">
+                  <td className="p-4 font-bold text-blue-600 text-base border-r border-slate-100/60 text-center">{slot.num}</td>
+                  <td className="p-4 text-slate-500 font-light flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" /> {slot.time}
+                  </td>
+                  
+                  {weekDays.map((day, dayIdx) => {
+                    const subject = classSchedule[dayIdx]?.[slotIdx] || '—';
+                    const isFree = subject === '—';
 
-        <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-light">
+                    return (
+                      <td key={day.key} className="p-4 border-l border-slate-100 align-top">
+                        <div className={`p-3 rounded-2xl border transition-all ${
+                          isFree 
+                            ? 'bg-transparent border-transparent opacity-30 text-center py-6 text-slate-300' 
+                            : 'bg-slate-50/80 border-slate-200/60 shadow-xs hover:border-blue-200 hover:bg-white hover:shadow-md'
+                        }`}>
+                          <div className="font-semibold text-[#1D1D1F] text-[13px] tracking-tight">
+                            {subject}
+                          </div>
+                          {!isFree && (
+                            <div className="text-[10px] text-slate-400 font-light pt-1 mt-1 border-t border-slate-200/40 flex items-center justify-between">
+                              <span>{selectedClass} sinfi</span>
+                              <span className="text-blue-600 font-medium">{slot.num}-soat</span>
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400 font-light">
           <div className="flex items-center gap-1.5 text-emerald-600 font-medium">
             <CheckCircle2 className="w-4 h-4" />
             Dars jadvali Xojimurodov Jaloliddin tomonidan taxrirlandi
