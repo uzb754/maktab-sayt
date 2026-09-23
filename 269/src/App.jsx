@@ -95,6 +95,7 @@ function AppContent() {
                 <li><Link to="/news" className="hover:text-blue-600 transition">Yangiliklar</Link></li>
                 <li><Link to="/winners" className="hover:text-blue-600 transition">Yutuqlarimiz</Link></li>
                 <li><Link to="/events" className="hover:text-blue-600 transition">Tadbirlar</Link></li>
+                <li><Link to="/schedule" className="hover:text-blue-600 transition">Dars jadvali</Link></li>
               </ul>
             </div>
 
@@ -102,17 +103,37 @@ function AppContent() {
             <div className="space-y-4">
               <h4 className="font-semibold text-[#1D1D1F] text-xs uppercase tracking-wider">Bog'lanish</h4>
               <ul className="space-y-3 text-xs text-slate-500 font-light">
-                <li className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-                  <span>Toshkent shahri, Sergeli tumani, 269-maktab</span>
+                {/* Lokatsiya bosilganda Yandex Kartadan ochiladi */}
+                <li>
+                  <a 
+                    href="https://yandex.uz/maps/?text=Toshkent+shahri,+Sergeli+tumani,+269-maktab" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-2 hover:text-blue-600 transition group"
+                  >
+                    <MapPin className="w-4 h-4 text-blue-600 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                    <span>Toshkent shahri, Sergeli tumani, 269-maktab</span>
+                  </a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>+998 99 778 88 66</span>
+                {/* Telefon raqam bosilganda qo'ng'iroq qilish oynasiga o'tadi */}
+                <li>
+                  <a 
+                    href="tel:+998712157891" 
+                    className="flex items-center gap-2 hover:text-emerald-600 transition group"
+                  >
+                    <Phone className="w-4 h-4 text-emerald-600 shrink-0 group-hover:scale-110 transition-transform" />
+                    <span>+998 71 215 78 91</span>
+                  </a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-amber-500 shrink-0" />
-                  <span>info@269-maktab.uz</span>
+                {/* Email bosilganda sayt bosh sahifasiga qayta o'tadi */}
+                <li>
+                  <Link 
+                    to="/" 
+                    className="flex items-center gap-2 hover:text-amber-500 transition group"
+                  >
+                    <Mail className="w-4 h-4 text-amber-500 shrink-0 group-hover:scale-110 transition-transform" />
+                    <span>info@269-maktab.uz</span>
+                  </Link>
                 </li>
               </ul>
             </div>
