@@ -74,7 +74,7 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                onClick={() => setIsOpen(false)} // Link bosilganda menyu yopilishi uchun
+                onClick={() => setIsOpen(false)}
                 className={`block px-4 py-2.5 rounded-lg text-base font-medium transition-all ${
                   isActive
                     ? 'text-blue-600 bg-blue-50 font-semibold'
